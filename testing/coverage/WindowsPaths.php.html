@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+		
+<html lang="en">
+		
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>WindowsPaths.php</title>
+	<link href="style/style.css" rel="stylesheet" type="text/css">
+	<link href="style/file.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div id="menu">
+	<ul><li><a href="index.html"><span></span>coverage</a></li></ul>
+</div>
+
+
+<h1>WindowsPaths.php</h1>
+
+<table>
+	<tr><th>1</th><td>&lt;?php</td></tr>
+	<tr><th>2</th><td></td></tr>
+	<tr><th>3</th><td>/**</td></tr>
+	<tr><th>4</th><td>&nbsp;*&nbsp;Copyright&nbsp;(C)&nbsp;2017&nbsp;Spencer&nbsp;Mortensen</td></tr>
+	<tr><th>5</th><td>&nbsp;*</td></tr>
+	<tr><th>6</th><td>&nbsp;*&nbsp;This&nbsp;file&nbsp;is&nbsp;part&nbsp;of&nbsp;paths.</td></tr>
+	<tr><th>7</th><td>&nbsp;*</td></tr>
+	<tr><th>8</th><td>&nbsp;*&nbsp;Paths&nbsp;is&nbsp;free&nbsp;software:&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify</td></tr>
+	<tr><th>9</th><td>&nbsp;*&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;Lesser&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by</td></tr>
+	<tr><th>10</th><td>&nbsp;*&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or</td></tr>
+	<tr><th>11</th><td>&nbsp;*&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.</td></tr>
+	<tr><th>12</th><td>&nbsp;*</td></tr>
+	<tr><th>13</th><td>&nbsp;*&nbsp;Paths&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,</td></tr>
+	<tr><th>14</th><td>&nbsp;*&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of</td></tr>
+	<tr><th>15</th><td>&nbsp;*&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;See&nbsp;the</td></tr>
+	<tr><th>16</th><td>&nbsp;*&nbsp;GNU&nbsp;Lesser&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.</td></tr>
+	<tr><th>17</th><td>&nbsp;*</td></tr>
+	<tr><th>18</th><td>&nbsp;*&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;Lesser&nbsp;General&nbsp;Public&nbsp;License</td></tr>
+	<tr><th>19</th><td>&nbsp;*&nbsp;along&nbsp;with&nbsp;paths.&nbsp;If&nbsp;not,&nbsp;see&nbsp;&lt;http://www.gnu.org/licenses/&gt;.</td></tr>
+	<tr><th>20</th><td>&nbsp;*</td></tr>
+	<tr><th>21</th><td>&nbsp;*&nbsp;@author&nbsp;Spencer&nbsp;Mortensen&nbsp;&lt;spencer@testphp.org&gt;</td></tr>
+	<tr><th>22</th><td>&nbsp;*&nbsp;@license&nbsp;http://www.gnu.org/licenses/lgpl-3.0.html&nbsp;LGPL-3.0</td></tr>
+	<tr><th>23</th><td>&nbsp;*&nbsp;@copyright&nbsp;2017&nbsp;Spencer&nbsp;Mortensen</td></tr>
+	<tr><th>24</th><td>&nbsp;*/</td></tr>
+	<tr><th>25</th><td></td></tr>
+	<tr><th>26</th><td>namespace&nbsp;SpencerMortensen\Paths;</td></tr>
+	<tr><th>27</th><td></td></tr>
+	<tr><th>28</th><td>class&nbsp;WindowsPaths&nbsp;extends&nbsp;Paths</td></tr>
+	<tr><th>29</th><td>{</td></tr>
+	<tr><th>30</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;join()</td></tr>
+	<tr><th>31</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>
+	<tr class="pass"><th>32</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$fragments&nbsp;=&nbsp;func_get_args();</td></tr>
+	<tr><th>33</th><td></td></tr>
+	<tr class="pass"><th>34</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$allParts&nbsp;=&nbsp;$this-&gt;getAllParts($fragments);</td></tr>
+	<tr><th>35</th><td></td></tr>
+	<tr class="pass"><th>36</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(($allParts&nbsp;===&nbsp;null)&nbsp;||&nbsp;(count($allParts)&nbsp;===&nbsp;0))&nbsp;{</td></tr>
+	<tr class="pass"><th>37</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;</td></tr>
+	<tr><th>38</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>39</th><td></td></tr>
+	<tr class="pass"><th>40</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$parts&nbsp;=&nbsp;array_shift($allParts);</td></tr>
+	<tr><th>41</th><td></td></tr>
+	<tr class="pass"><th>42</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$drive&nbsp;=&nbsp;$parts['drive'];</td></tr>
+	<tr class="pass"><th>43</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$atoms&nbsp;=&nbsp;$parts['atoms'];</td></tr>
+	<tr class="pass"><th>44</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$isAbsolute&nbsp;=&nbsp;$parts['isAbsolute'];</td></tr>
+	<tr><th>45</th><td></td></tr>
+	<tr class="pass"><th>46</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;($allParts&nbsp;as&nbsp;$parts)&nbsp;{</td></tr>
+	<tr><th>47</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;TODO:&nbsp;consider&nbsp;rejecting&nbsp;path&nbsp;fragments&nbsp;that&nbsp;start&nbsp;with&nbsp;a&nbsp;conflicting&nbsp;drive&nbsp;letter</td></tr>
+	<tr class="pass"><th>48</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$atoms&nbsp;=&nbsp;array_merge($atoms,&nbsp;$parts['atoms']);</td></tr>
+	<tr><th>49</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>50</th><td></td></tr>
+	<tr class="pass"><th>51</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$this-&gt;getPath($drive,&nbsp;$atoms,&nbsp;$isAbsolute);</td></tr>
+	<tr><th>52</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>53</th><td></td></tr>
+	<tr><th>54</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;function&nbsp;getAllParts(array&nbsp;$fragments)</td></tr>
+	<tr><th>55</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>
+	<tr class="pass"><th>56</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$allParts&nbsp;=&nbsp;array();</td></tr>
+	<tr><th>57</th><td></td></tr>
+	<tr class="pass"><th>58</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;($fragments&nbsp;as&nbsp;$fragment)&nbsp;{</td></tr>
+	<tr class="pass"><th>59</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$parts&nbsp;=&nbsp;$this-&gt;explode($fragment);</td></tr>
+	<tr><th>60</th><td></td></tr>
+	<tr class="pass"><th>61</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($parts&nbsp;===&nbsp;null)&nbsp;{</td></tr>
+	<tr class="fail"><th>62</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;</td></tr>
+	<tr><th>63</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>64</th><td></td></tr>
+	<tr class="pass"><th>65</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$allParts[]&nbsp;=&nbsp;$parts;</td></tr>
+	<tr><th>66</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>67</th><td></td></tr>
+	<tr class="pass"><th>68</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$allParts;</td></tr>
+	<tr><th>69</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>70</th><td></td></tr>
+	<tr><th>71</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;getRelativePath($aPath,&nbsp;$bPath)</td></tr>
+	<tr><th>72</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>
+	<tr class="fail"><th>73</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$aParts&nbsp;=&nbsp;$this-&gt;explode($aPath);</td></tr>
+	<tr class="fail"><th>74</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$bParts&nbsp;=&nbsp;$this-&gt;explode($bPath);</td></tr>
+	<tr><th>75</th><td></td></tr>
+	<tr class="fail"><th>76</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!isset($aParts,&nbsp;$bParts))&nbsp;{</td></tr>
+	<tr class="fail"><th>77</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;</td></tr>
+	<tr><th>78</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>79</th><td></td></tr>
+	<tr class="fail"><th>80</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!$aParts['isAbsolute']&nbsp;||&nbsp;!$bParts['isAbsolute'])&nbsp;{</td></tr>
+	<tr class="fail"><th>81</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;</td></tr>
+	<tr><th>82</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>83</th><td></td></tr>
+	<tr class="fail"><th>84</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$aAtoms&nbsp;=&nbsp;$aParts['atoms'];</td></tr>
+	<tr class="fail"><th>85</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$bAtoms&nbsp;=&nbsp;$bParts['atoms'];</td></tr>
+	<tr><th>86</th><td></td></tr>
+	<tr class="fail"><th>87</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$aCount&nbsp;=&nbsp;count($aAtoms);</td></tr>
+	<tr class="fail"><th>88</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$bCount&nbsp;=&nbsp;count($bAtoms);</td></tr>
+	<tr><th>89</th><td></td></tr>
+	<tr class="fail"><th>90</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;($i&nbsp;=&nbsp;0,&nbsp;$n&nbsp;=&nbsp;min($aCount,&nbsp;$bCount);&nbsp;($i&nbsp;&lt;&nbsp;$n)&nbsp;&amp;&amp;&nbsp;($aAtoms[$i]&nbsp;===&nbsp;$bAtoms[$i]);&nbsp;++$i);</td></tr>
+	<tr><th>91</th><td></td></tr>
+	<tr class="fail"><th>92</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$atoms&nbsp;=&nbsp;array_fill(0,&nbsp;$aCount&nbsp;-&nbsp;$i,&nbsp;'..');</td></tr>
+	<tr class="fail"><th>93</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$atoms&nbsp;=&nbsp;array_merge($atoms,&nbsp;array_slice($bAtoms,&nbsp;$i));</td></tr>
+	<tr><th>94</th><td></td></tr>
+	<tr class="fail"><th>95</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$this-&gt;getPath(null,&nbsp;$atoms,&nbsp;false);</td></tr>
+	<tr><th>96</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>97</th><td></td></tr>
+	<tr><th>98</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;isChildPath($aPath,&nbsp;$bPath)</td></tr>
+	<tr><th>99</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>
+	<tr class="fail"><th>100</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$aParts&nbsp;=&nbsp;$this-&gt;explode($aPath);</td></tr>
+	<tr class="fail"><th>101</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$bParts&nbsp;=&nbsp;$this-&gt;explode($bPath);</td></tr>
+	<tr><th>102</th><td></td></tr>
+	<tr class="fail"><th>103</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!isset($aParts,&nbsp;$bParts))&nbsp;{</td></tr>
+	<tr class="fail"><th>104</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;</td></tr>
+	<tr><th>105</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>106</th><td></td></tr>
+	<tr class="fail"><th>107</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!$bParts['isAbsolute'])&nbsp;{</td></tr>
+	<tr class="fail"><th>108</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;</td></tr>
+	<tr><th>109</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>110</th><td></td></tr>
+	<tr class="fail"><th>111</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!$aParts['isAbsolute'])&nbsp;{</td></tr>
+	<tr class="fail"><th>112</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;</td></tr>
+	<tr><th>113</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>114</th><td></td></tr>
+	<tr class="fail"><th>115</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;strncmp($aPath&nbsp;.&nbsp;'\\',&nbsp;$bPath&nbsp;.&nbsp;'\\',&nbsp;strlen($aPath)&nbsp;+&nbsp;1)&nbsp;===&nbsp;0;</td></tr>
+	<tr><th>116</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>117</th><td></td></tr>
+	<tr><th>118</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;explode($path)</td></tr>
+	<tr><th>119</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>
+	<tr class="pass"><th>120</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!Re::match('^(?:(?&lt;drive&gt;[a-zA-Z]):)?(?&lt;path&gt;.*)$',&nbsp;$path,&nbsp;$match))&nbsp;{</td></tr>
+	<tr class="fail"><th>121</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;</td></tr>
+	<tr><th>122</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>123</th><td></td></tr>
+	<tr class="pass"><th>124</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$drive&nbsp;=&nbsp;self::getNonEmptyString($match['drive']);</td></tr>
+	<tr class="pass"><th>125</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$path&nbsp;=&nbsp;self::getNonEmptyString($match['path']);</td></tr>
+	<tr class="pass"><th>126</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$atoms&nbsp;=&nbsp;self::getAtoms($path);</td></tr>
+	<tr class="pass"><th>127</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$isAbsolute&nbsp;=&nbsp;self::isAbsolute($path);</td></tr>
+	<tr><th>128</th><td></td></tr>
+	<tr><th>129</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array(</td></tr>
+	<tr class="pass"><th>130</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'drive'&nbsp;=&gt;&nbsp;$drive,</td></tr>
+	<tr class="pass"><th>131</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'atoms'&nbsp;=&gt;&nbsp;$atoms,</td></tr>
+	<tr class="pass"><th>132</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'isAbsolute'&nbsp;=&gt;&nbsp;$isAbsolute</td></tr>
+	<tr><th>133</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);</td></tr>
+	<tr><th>134</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>135</th><td></td></tr>
+	<tr><th>136</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;function&nbsp;getNonEmptyString(&amp;$input)</td></tr>
+	<tr><th>137</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>
+	<tr class="pass"><th>138</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(!is_string($input)&nbsp;||&nbsp;(strlen($input)&nbsp;===&nbsp;0))&nbsp;{</td></tr>
+	<tr class="pass"><th>139</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;null;</td></tr>
+	<tr><th>140</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>141</th><td></td></tr>
+	<tr class="pass"><th>142</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$input;</td></tr>
+	<tr><th>143</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>144</th><td></td></tr>
+	<tr><th>145</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;function&nbsp;getAtoms($path)</td></tr>
+	<tr><th>146</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>
+	<tr class="pass"><th>147</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($path&nbsp;===&nbsp;null)&nbsp;{</td></tr>
+	<tr class="pass"><th>148</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array();</td></tr>
+	<tr><th>149</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>150</th><td></td></tr>
+	<tr class="pass"><th>151</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$matches&nbsp;=&nbsp;Re::split('\\\\|/',&nbsp;$path);</td></tr>
+	<tr class="pass"><th>152</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$atoms&nbsp;=&nbsp;array_values(array_filter($matches,&nbsp;'is_string'));</td></tr>
+	<tr><th>153</th><td></td></tr>
+	<tr class="pass"><th>154</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$atoms;</td></tr>
+	<tr><th>155</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>156</th><td></td></tr>
+	<tr><th>157</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;function&nbsp;isAbsolute($path)</td></tr>
+	<tr><th>158</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>
+	<tr class="pass"><th>159</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($path&nbsp;===&nbsp;null)&nbsp;{</td></tr>
+	<tr class="pass"><th>160</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false;</td></tr>
+	<tr><th>161</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>162</th><td></td></tr>
+	<tr class="pass"><th>163</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$character&nbsp;=&nbsp;substr($path,&nbsp;0,&nbsp;1);</td></tr>
+	<tr><th>164</th><td></td></tr>
+	<tr class="pass"><th>165</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;($character&nbsp;===&nbsp;'\\')&nbsp;||&nbsp;($character&nbsp;===&nbsp;'/');</td></tr>
+	<tr><th>166</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>167</th><td></td></tr>
+	<tr><th>168</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;function&nbsp;implode(array&nbsp;$parts)</td></tr>
+	<tr><th>169</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>
+	<tr class="fail"><th>170</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$drive&nbsp;=&nbsp;&amp;$parts['drive'];</td></tr>
+	<tr class="fail"><th>171</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$atoms&nbsp;=&nbsp;&amp;$parts['atoms'];</td></tr>
+	<tr class="fail"><th>172</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$isAbsolute&nbsp;=&nbsp;&amp;$parts['isAbsolute'];</td></tr>
+	<tr><th>173</th><td></td></tr>
+	<tr class="fail"><th>174</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$this-&gt;getPath($drive,&nbsp;$atoms,&nbsp;$isAbsolute);</td></tr>
+	<tr><th>175</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>176</th><td></td></tr>
+	<tr><th>177</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;function&nbsp;getPath($drive,&nbsp;array&nbsp;$atoms,&nbsp;$isAbsolute)</td></tr>
+	<tr><th>178</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</td></tr>
+	<tr class="pass"><th>179</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$path&nbsp;=&nbsp;'';</td></tr>
+	<tr><th>180</th><td></td></tr>
+	<tr class="pass"><th>181</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($drive&nbsp;!==&nbsp;null)&nbsp;{</td></tr>
+	<tr class="pass"><th>182</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$path&nbsp;.=&nbsp;&quot;{$drive}:&quot;;</td></tr>
+	<tr><th>183</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>184</th><td></td></tr>
+	<tr class="pass"><th>185</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;($isAbsolute)&nbsp;{</td></tr>
+	<tr class="pass"><th>186</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$path&nbsp;.=&nbsp;&quot;\\&quot;;</td></tr>
+	<tr><th>187</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>188</th><td></td></tr>
+	<tr class="pass"><th>189</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$path&nbsp;.=&nbsp;implode('\\',&nbsp;$atoms);</td></tr>
+	<tr><th>190</th><td></td></tr>
+	<tr class="pass"><th>191</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;$path;</td></tr>
+	<tr><th>192</th><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td></tr>
+	<tr><th>193</th><td>}</td></tr>
+	<tr><th>194</th><td></td></tr>
+</table>
+
+</body>
+
+</html>
