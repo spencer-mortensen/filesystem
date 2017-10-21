@@ -70,7 +70,7 @@ $input = array(
 );
 
 // Output
-$output = 'C:';
+$output = 'C:.';
 
 // Input
 $input = array(
@@ -125,6 +125,27 @@ $output = 'C:Windows';
 $c = $paths->isChildPath($a, $b);
 
 // Input
+$a = 'C:';
+$b = 'C:';
+
+// Output
+$c = false;
+
+// Input
+$a = 'C:\\';
+$b = 'C:';
+
+// Output
+$c = false;
+
+// Input
+$a = 'C:';
+$b = 'C:\\';
+
+// Output
+$c = false;
+
+// Input
 $a = 'C:\\';
 $b = 'C:\\';
 
@@ -162,6 +183,27 @@ $c = true;
 
 // Test
 $c = $paths->getRelativePath($a, $b);
+
+// Input
+$a = 'C:';
+$b = 'C:';
+
+// Output
+$c = null;
+
+// Input
+$a = 'C:\\';
+$b = 'C:';
+
+// Output
+$c = null;
+
+// Input
+$a = 'C:';
+$b = 'C:\\';
+
+// Output
+$c = null;
 
 // Input
 $a = 'C:\\';
