@@ -33,7 +33,7 @@ class WindowsPaths extends Paths
 
 		$allParts = $this->getAllParts($fragments);
 
-		if (($allParts === null) || (count($allParts) === 0)) {
+		if (count($allParts) === 0) {
 			return null;
 		}
 
@@ -56,13 +56,7 @@ class WindowsPaths extends Paths
 		$allParts = array();
 
 		foreach ($fragments as $fragment) {
-			$parts = $this->explode($fragment);
-
-			if ($parts === null) {
-				return null;
-			}
-
-			$allParts[] = $parts;
+			$allParts[] = $this->explode($fragment);
 		}
 
 		return $allParts;
@@ -72,10 +66,6 @@ class WindowsPaths extends Paths
 	{
 		$aParts = $this->explode($aPath);
 		$bParts = $this->explode($bPath);
-
-		if (!isset($aParts, $bParts)) {
-			return null;
-		}
 
 		if (!$aParts['isAbsolute'] || !$bParts['isAbsolute']) {
 			return null;
@@ -100,26 +90,14 @@ class WindowsPaths extends Paths
 		$aParts = $this->explode($aPath);
 		$bParts = $this->explode($bPath);
 
-		if (!isset($aParts, $bParts)) {
-			return false;
-		}
-
-		if (!$bParts['isAbsolute']) {
-			return true;
-		}
-
-		if (!$aParts['isAbsolute']) {
-			return false;
-		}
-
-		return strncmp($aPath . '\\', $bPath . '\\', strlen($aPath) + 1) === 0;
+		return $bParts['isAbsolute'] &&
+			$aParts['isAbsolute'] &&
+			(strncmp($aPath . '\\', $bPath . '\\', strlen($aPath) + 1) === 0);
 	}
 
 	public function explode($path)
 	{
-		if (!Re::match('^(?:(?<drive>[a-zA-Z]):)?(?<path>.*)$', $path, $match)) {
-			return null;
-		}
+		Re::match('^(?:(?<drive>[a-zA-Z]):)?(?<path>.*)$', $path, $match);
 
 		$drive = self::getNonEmptyString($match['drive']);
 		$path = self::getNonEmptyString($match['path']);
@@ -183,11 +161,25 @@ class WindowsPaths extends Paths
 		}
 
 		if ($isAbsolute) {
-			$path .= "\\";
+			$path .= self::getAbsolute($atoms);
+		} else {
+			$path .= self::getRelative($atoms);
 		}
 
-		$path .= implode('\\', $atoms);
-
 		return $path;
+	}
+
+	private static function getAbsolute(array $atoms)
+	{
+		return '\\' . implode('\\', $atoms);
+	}
+
+	private static function getRelative(array $atoms)
+	{
+		if (count($atoms) === 0) {
+			return '.';
+		}
+
+		return implode('\\', $atoms);
 	}
 }
