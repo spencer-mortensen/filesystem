@@ -6,91 +6,59 @@ $paths = new WindowsPaths();
 
 
 // Test
-$output = $paths->explode($input);
+$output= $paths->serialize($input);
 
 // Input
-$input = 'C:\\';
-
-// Output
-$output = array(
-	'drive' => 'C',
-	'atoms' => array(),
-	'isAbsolute' => true
-);
-
-// Input
-$input = 'C:';
-
-// Output
-$output = array(
-	'drive' => 'C',
-	'atoms' => array(),
-	'isAbsolute' => false
-);
-
-// Input
-$input = 'C:\\Windows\\win.ini';
-
-// Output
-$output = array(
-	'drive' => 'C',
-	'atoms' => array('Windows', 'win.ini'),
-	'isAbsolute' => true
-);
-
-// Input
-$input = 'C:Windows\\win.ini';
-
-// Output
-$output = array(
-	'drive' => 'C',
-	'atoms' => array('Windows', 'win.ini'),
-	'isAbsolute' => false
-);
-
-
-// Test
-$output= $paths->implode($input);
-
-// Input
-$input = array(
-	'drive' => 'C',
-	'atoms' => array(),
-	'isAbsolute' => true
-);
+$input = new WindowsPathData('C', array(), true);
 
 // Output
 $output = 'C:\\';
 
 // Input
-$input = array(
-	'drive' => 'C',
-	'atoms' => array(),
-	'isAbsolute' => false
-);
+$input = new WindowsPathData('C', array(), false);
 
 // Output
 $output = 'C:.';
 
 // Input
-$input = array(
-	'drive' => 'C',
-	'atoms' => array('Windows', 'win.ini'),
-	'isAbsolute' => true
-);
+$input = new WindowsPathData('C', array('Windows', 'win.ini'), true);
 
 // Output
 $output = 'C:\\Windows\\win.ini';
 
 // Input
-$input = array(
-	'drive' => 'C',
-	'atoms' => array('Windows', 'win.ini'),
-	'isAbsolute' => false
-);
+$input = new WindowsPathData('C', array('Windows', 'win.ini'), false);
 
 // Output
 $output = 'C:Windows\\win.ini';
+
+
+// Test
+$output = $paths->deserialize($input);
+
+// Input
+$input = 'C:\\';
+
+// Output
+$output = new WindowsPathData('C', array(), true);
+
+// Input
+$input = 'C:';
+
+// Output
+$output = new WindowsPathData('C', array(), false);
+
+// Input
+$input = 'C:\\Windows\\win.ini';
+
+// Output
+$output = new WindowsPathData('C', array('Windows', 'win.ini'), true);
+
+// Input
+$input = 'C:Windows\\win.ini';
+
+// Output
+$output = new WindowsPathData('C', array('Windows', 'win.ini'), false);
 
 
 // Test
