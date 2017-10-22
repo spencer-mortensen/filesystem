@@ -27,9 +27,85 @@ namespace SpencerMortensen\Paths;
 
 abstract class Paths
 {
-	abstract public function join();
-	abstract public function getRelativePath($aPath, $bPath);
+	abstract public function serialize($data);
+	abstract public function deserialize($path);
+
+	protected function getPath($isAbsolute, array $atoms, $separator)
+	{
+		if ($isAbsolute) {
+			return $this->getAbsolute($atoms, $separator);
+		} else {
+			return $this->getRelative($atoms, $separator);
+		}
+	}
+
+	private function getAbsolute(array $atoms, $separator)
+	{
+		return $separator . implode($separator, $atoms);
+	}
+
+	private function getRelative(array $atoms, $separator)
+	{
+		if (count($atoms) === 0) {
+			return '.';
+		}
+
+		return implode($separator, $atoms);
+	}
+
+	public function join()
+	{
+		$fragments = func_get_args();
+
+		if (count($fragments) === 0) {
+			return null;
+		}
+
+		$parts = array();
+
+		foreach ($fragments as $fragment) {
+			$parts[] = $this->deserialize($fragment);
+		}
+
+		$data = current($parts);
+
+		$atoms = array();
+
+		foreach ($parts as $part) {
+			// TODO: consider rejecting path fragments that start with a conflicting drive letter
+			$newAtoms = $part->getAtoms();
+			$atoms = array_merge($atoms, $newAtoms);
+		}
+
+		$data->setAtoms($atoms);
+
+		return $this->serialize($data);
+	}
+
+	public function getRelativePath($aPath, $bPath)
+	{
+		$aParts = $this->deserialize($aPath);
+		$bParts = $this->deserialize($bPath);
+
+		if (!$aParts->isAbsolute() || !$bParts->isAbsolute()) {
+			return null;
+		}
+
+		$aAtoms = $aParts->getAtoms();
+		$bAtoms = $bParts->getAtoms();
+
+		$aCount = count($aAtoms);
+		$bCount = count($bAtoms);
+
+		for ($i = 0, $n = min($aCount, $bCount); ($i < $n) && ($aAtoms[$i] === $bAtoms[$i]); ++$i);
+
+		$atoms = array_fill(0, $aCount - $i, '..');
+		$atoms = array_merge($atoms, array_slice($bAtoms, $i));
+
+		$cData = new WindowsPathData(null, $atoms, false);
+
+		return $this->serialize($cData);
+	}
+
 	abstract public function isChildPath($aPath, $bPath);
-	abstract public function explode($path);
-	abstract public function implode(array $parts);
 }

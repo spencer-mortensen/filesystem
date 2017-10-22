@@ -25,47 +25,41 @@
 
 namespace SpencerMortensen\Paths;
 
-class UnixPaths extends Paths
+class WindowsPathData
 {
-	public function serialize($data)
-	{
-		$isAbsolute = $data->isAbsolute();
-		$atoms = $data->getAtoms();
+	/** @var string */
+	private $drive;
 
-		return $this->getPath($isAbsolute, $atoms, '/');
+	/** @var array */
+	private $atoms;
+
+	/** @var boolean */
+	private $isAbsolute;
+
+	public function __construct($drive, $atoms, $isAbsolute)
+	{
+		$this->drive = $drive;
+		$this->atoms = $atoms;
+		$this->isAbsolute = $isAbsolute;
 	}
 
-	public function deserialize($path)
+	public function getDrive()
 	{
-		$atoms = self::getAtoms($path);
-		$isAbsolute = self::isAbsolute($path);
-
-		return new UnixPathData($atoms, $isAbsolute);
+		return $this->drive;
 	}
 
-	private static function getAtoms($path)
+	public function getAtoms()
 	{
-		$matches = Re::split('/', $path);
-		$atoms = array_values(array_filter($matches, 'is_string'));
-
-		return $atoms;
+		return $this->atoms;
 	}
 
-	private static function isAbsolute($path)
+	public function setAtoms(array $atoms)
 	{
-		return substr($path, 0, 1) === '/';
+		$this->atoms = $atoms;
 	}
 
-	public function isChildPath($aPath, $bPath)
+	public function isAbsolute()
 	{
-		$aData = $this->deserialize($aPath);
-		$bData = $this->deserialize($bPath);
-
-		$aAtoms = $aData->getAtoms();
-		$bAtoms = $bData->getAtoms();
-
-		return $aData->isAbsolute() &&
-			$bData->isAbsolute() &&
-			($aAtoms === array_slice($bAtoms, 0, count($aAtoms)));
+		return $this->isAbsolute;
 	}
 }

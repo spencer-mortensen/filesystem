@@ -27,75 +27,23 @@ namespace SpencerMortensen\Paths;
 
 class WindowsPaths extends Paths
 {
-	public function join()
+	public function serialize($data)
 	{
-		$fragments = func_get_args();
+		$isAbsolute = $data->isAbsolute();
+		$atoms = $data->getAtoms();
 
-		$allParts = $this->getAllParts($fragments);
+		$path = $this->getPath($isAbsolute, $atoms, '\\');
 
-		if (count($allParts) === 0) {
-			return null;
+		$drive = $data->getDrive();
+
+		if ($drive !== null) {
+			$path = "{$drive}:{$path}";
 		}
 
-		$parts = array_shift($allParts);
-
-		$drive = $parts['drive'];
-		$atoms = $parts['atoms'];
-		$isAbsolute = $parts['isAbsolute'];
-
-		foreach ($allParts as $parts) {
-			// TODO: consider rejecting path fragments that start with a conflicting drive letter
-			$atoms = array_merge($atoms, $parts['atoms']);
-		}
-
-		return $this->getPath($drive, $atoms, $isAbsolute);
+		return $path;
 	}
 
-	private function getAllParts(array $fragments)
-	{
-		$allParts = array();
-
-		foreach ($fragments as $fragment) {
-			$allParts[] = $this->explode($fragment);
-		}
-
-		return $allParts;
-	}
-
-	public function getRelativePath($aPath, $bPath)
-	{
-		$aParts = $this->explode($aPath);
-		$bParts = $this->explode($bPath);
-
-		if (!$aParts['isAbsolute'] || !$bParts['isAbsolute']) {
-			return null;
-		}
-
-		$aAtoms = $aParts['atoms'];
-		$bAtoms = $bParts['atoms'];
-
-		$aCount = count($aAtoms);
-		$bCount = count($bAtoms);
-
-		for ($i = 0, $n = min($aCount, $bCount); ($i < $n) && ($aAtoms[$i] === $bAtoms[$i]); ++$i);
-
-		$atoms = array_fill(0, $aCount - $i, '..');
-		$atoms = array_merge($atoms, array_slice($bAtoms, $i));
-
-		return $this->getPath(null, $atoms, false);
-	}
-
-	public function isChildPath($aPath, $bPath)
-	{
-		$aParts = $this->explode($aPath);
-		$bParts = $this->explode($bPath);
-
-		return $bParts['isAbsolute'] &&
-			$aParts['isAbsolute'] &&
-			(strncmp($aPath . '\\', $bPath . '\\', strlen($aPath) + 1) === 0);
-	}
-
-	public function explode($path)
+	public function deserialize($path)
 	{
 		Re::match('^(?:(?<drive>[a-zA-Z]):)?(?<path>.*)$', $path, $match);
 
@@ -104,11 +52,7 @@ class WindowsPaths extends Paths
 		$atoms = self::getAtoms($path);
 		$isAbsolute = self::isAbsolute($path);
 
-		return array(
-			'drive' => $drive,
-			'atoms' => $atoms,
-			'isAbsolute' => $isAbsolute
-		);
+		return new WindowsPathData($drive, $atoms, $isAbsolute);
 	}
 
 	private static function getNonEmptyString(&$input)
@@ -143,43 +87,17 @@ class WindowsPaths extends Paths
 		return ($character === '\\') || ($character === '/');
 	}
 
-	public function implode(array $parts)
+	public function isChildPath($aPath, $bPath)
 	{
-		$drive = &$parts['drive'];
-		$atoms = &$parts['atoms'];
-		$isAbsolute = &$parts['isAbsolute'];
+		$aData = $this->deserialize($aPath);
+		$bData = $this->deserialize($bPath);
 
-		return $this->getPath($drive, $atoms, $isAbsolute);
-	}
+		$aAtoms = $aData->getAtoms();
+		$bAtoms = $bData->getAtoms();
 
-	private function getPath($drive, array $atoms, $isAbsolute)
-	{
-		$path = '';
-
-		if ($drive !== null) {
-			$path .= "{$drive}:";
-		}
-
-		if ($isAbsolute) {
-			$path .= self::getAbsolute($atoms);
-		} else {
-			$path .= self::getRelative($atoms);
-		}
-
-		return $path;
-	}
-
-	private static function getAbsolute(array $atoms)
-	{
-		return '\\' . implode('\\', $atoms);
-	}
-
-	private static function getRelative(array $atoms)
-	{
-		if (count($atoms) === 0) {
-			return '.';
-		}
-
-		return implode('\\', $atoms);
+		// TODO: take into account the drive letters
+		return $aData->isAbsolute() &&
+			$bData->isAbsolute() &&
+			($aAtoms === array_slice($bAtoms, 0, count($aAtoms)));
 	}
 }

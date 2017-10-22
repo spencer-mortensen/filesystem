@@ -25,47 +25,32 @@
 
 namespace SpencerMortensen\Paths;
 
-class UnixPaths extends Paths
+class UnixPathData
 {
-	public function serialize($data)
-	{
-		$isAbsolute = $data->isAbsolute();
-		$atoms = $data->getAtoms();
+	/** @var array */
+	private $atoms;
 
-		return $this->getPath($isAbsolute, $atoms, '/');
+	/** @var boolean */
+	private $isAbsolute;
+
+	public function __construct($atoms, $isAbsolute)
+	{
+		$this->atoms = $atoms;
+		$this->isAbsolute = $isAbsolute;
 	}
 
-	public function deserialize($path)
+	public function getAtoms()
 	{
-		$atoms = self::getAtoms($path);
-		$isAbsolute = self::isAbsolute($path);
-
-		return new UnixPathData($atoms, $isAbsolute);
+		return $this->atoms;
 	}
 
-	private static function getAtoms($path)
+	public function setAtoms(array $atoms)
 	{
-		$matches = Re::split('/', $path);
-		$atoms = array_values(array_filter($matches, 'is_string'));
-
-		return $atoms;
+		$this->atoms = $atoms;
 	}
 
-	private static function isAbsolute($path)
+	public function isAbsolute()
 	{
-		return substr($path, 0, 1) === '/';
-	}
-
-	public function isChildPath($aPath, $bPath)
-	{
-		$aData = $this->deserialize($aPath);
-		$bData = $this->deserialize($bPath);
-
-		$aAtoms = $aData->getAtoms();
-		$bAtoms = $bData->getAtoms();
-
-		return $aData->isAbsolute() &&
-			$bData->isAbsolute() &&
-			($aAtoms === array_slice($bAtoms, 0, count($aAtoms)));
+		return $this->isAbsolute;
 	}
 }
