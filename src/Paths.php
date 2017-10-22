@@ -27,6 +27,15 @@ namespace SpencerMortensen\Paths;
 
 abstract class Paths
 {
+	public static function getPlatformPaths($separator = DIRECTORY_SEPARATOR)
+	{
+		if ($separator === '\\') {
+			return new WindowsPaths();
+		}
+
+		return new UnixPaths();
+	}
+
 	abstract public function serialize($data);
 	abstract public function deserialize($path);
 
