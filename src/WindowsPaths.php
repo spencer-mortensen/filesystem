@@ -25,6 +25,8 @@
 
 namespace SpencerMortensen\Paths;
 
+use SpencerMortensen\RegularExpressions\Re;
+
 class WindowsPaths extends Paths
 {
 	public function serialize($data)
@@ -70,10 +72,7 @@ class WindowsPaths extends Paths
 			return array();
 		}
 
-		$matches = Re::split('\\\\|/', $path);
-		$atoms = array_values(array_filter($matches, 'is_string'));
-
-		return $atoms;
+		return Re::split('\\\\|/', $path);
 	}
 
 	private static function isAbsolute($path)

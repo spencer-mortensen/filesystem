@@ -5,7 +5,7 @@ call_user_func(function () {
 
 	$classes = array(
 		'SpencerMortensen\\Paths' => "{$projectDirectory}/src",
-		'SpencerMortensen\\Parser' => "{$projectDirectory}/vendor/spencer-mortensen/parser"
+		'SpencerMortensen\\RegularExpressions' => "{$projectDirectory}/vendor/spencer-mortensen/regular-expressions/src"
 	);
 
 	foreach ($classes as $namespacePrefix => $libraryPath) {

@@ -25,6 +25,8 @@
 
 namespace SpencerMortensen\Paths;
 
+use SpencerMortensen\RegularExpressions\Re;
+
 class UnixPaths extends Paths
 {
 	public function serialize($data)
@@ -45,10 +47,7 @@ class UnixPaths extends Paths
 
 	private static function getAtoms($path)
 	{
-		$matches = Re::split('/', $path);
-		$atoms = array_values(array_filter($matches, 'is_string'));
-
-		return $atoms;
+		return Re::split('/', $path);
 	}
 
 	private static function isAbsolute($path)
