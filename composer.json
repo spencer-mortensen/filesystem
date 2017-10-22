@@ -1,0 +1,29 @@
+{
+    "name": "spencer-mortensen/paths",
+    "type": "library",
+    "description": "Use filesystem paths on any operating system",
+    "keywords": [
+        "filesystem",
+        "paths",
+        "Linux",
+        "Windows"
+    ],
+    "homepage": "https://github.com/spencer-mortensen/paths",
+    "license": "LGPL-3.0",
+    "authors": [
+        {
+            "name": "Spencer Mortensen",
+            "email": "spencer@lens.guide",
+            "homepage": "http://spencermortensen.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SpencerMortensen\\Paths\\": "src"
+        }
+    }
+}
