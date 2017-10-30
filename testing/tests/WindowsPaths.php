@@ -88,6 +88,12 @@ $input = array('C:', 'Windows');
 // Output
 $output = 'C:Windows';
 
+// Input
+$input = array(array('C:', 'Windows'));
+
+// Output
+$output = 'C:Windows';
+
 
 // Test
 $c = $paths->isChildPath($a, $b);

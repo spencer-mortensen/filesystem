@@ -64,7 +64,8 @@ abstract class Paths
 
 	public function join()
 	{
-		$fragments = func_get_args();
+		$arguments = func_get_args();
+		$fragments = $this->getFragments($arguments);
 
 		if (count($fragments) === 0) {
 			return null;
@@ -89,6 +90,23 @@ abstract class Paths
 		$data->setAtoms($atoms);
 
 		return $this->serialize($data);
+	}
+
+	private function getFragments(array $arguments)
+	{
+		$fragments = array();
+
+		foreach ($arguments as $argument) {
+			if (is_string($argument)) {
+				$fragments[] = $argument;
+			} elseif (is_array($argument)) {
+				$fragments = array_merge($fragments, $argument);
+			} else {
+				// Throw a type error
+			}
+		}
+
+		return $fragments;
 	}
 
 	public function getRelativePath($aPath, $bPath)

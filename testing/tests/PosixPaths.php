@@ -88,6 +88,12 @@ $input = array('etc', 'fstab');
 // Output
 $output = 'etc/fstab';
 
+// Input
+$input = array(array('etc', 'fstab'));
+
+// Output
+$output = 'etc/fstab';
+
 
 // Test
 $c = $paths->isChildPath($a, $b);
