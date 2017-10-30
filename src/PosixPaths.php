@@ -25,32 +25,46 @@
 
 namespace SpencerMortensen\Paths;
 
-class UnixPathData
+use SpencerMortensen\RegularExpressions\Re;
+
+class PosixPaths extends Paths
 {
-	/** @var array */
-	private $atoms;
-
-	/** @var boolean */
-	private $isAbsolute;
-
-	public function __construct($atoms, $isAbsolute)
+	public function serialize($data)
 	{
-		$this->atoms = $atoms;
-		$this->isAbsolute = $isAbsolute;
+		$isAbsolute = $data->isAbsolute();
+		$atoms = $data->getAtoms();
+
+		return $this->getPath($isAbsolute, $atoms, '/');
 	}
 
-	public function getAtoms()
+	public function deserialize($path)
 	{
-		return $this->atoms;
+		$atoms = self::getAtoms($path);
+		$isAbsolute = self::isAbsolute($path);
+
+		return new PosixPathData($atoms, $isAbsolute);
 	}
 
-	public function setAtoms(array $atoms)
+	private static function getAtoms($path)
 	{
-		$this->atoms = $atoms;
+		return Re::split('/', $path);
 	}
 
-	public function isAbsolute()
+	private static function isAbsolute($path)
 	{
-		return $this->isAbsolute;
+		return substr($path, 0, 1) === '/';
+	}
+
+	public function isChildPath($aPath, $bPath)
+	{
+		$aData = $this->deserialize($aPath);
+		$bData = $this->deserialize($bPath);
+
+		$aAtoms = $aData->getAtoms();
+		$bAtoms = $bData->getAtoms();
+
+		return $aData->isAbsolute() &&
+			$bData->isAbsolute() &&
+			($aAtoms === array_slice($bAtoms, 0, count($aAtoms)));
 	}
 }

@@ -33,7 +33,7 @@ abstract class Paths
 			return new WindowsPaths();
 		}
 
-		return new UnixPaths();
+		return new PosixPaths();
 	}
 
 	abstract public function serialize($data);
