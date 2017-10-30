@@ -2,32 +2,32 @@
 
 namespace SpencerMortensen\Paths;
 
-$paths = new UnixPaths();
+$paths = new PosixPaths();
 
 
 // Test
 $output= $paths->serialize($input);
 
 // Input
-$input = new UnixPathData(array(), true);
+$input = new PosixPathData(array(), true);
 
 // Output
 $output = '/';
 
 // Input
-$input = new UnixPathData(array(), false);
+$input = new PosixPathData(array(), false);
 
 // Output
 $output = '.';
 
 // Input
-$input = new UnixPathData(array('etc', 'fstab'), true);
+$input = new PosixPathData(array('etc', 'fstab'), true);
 
 // Output
 $output = '/etc/fstab';
 
 // Input
-$input = new UnixPathData(array('etc', 'fstab'), false);
+$input = new PosixPathData(array('etc', 'fstab'), false);
 
 // Output
 $output = 'etc/fstab';
@@ -40,25 +40,25 @@ $output = $paths->deserialize($input);
 $input = '/';
 
 // Output
-$output = new UnixPathData(array(), true);
+$output = new PosixPathData(array(), true);
 
 // Input
 $input = '';
 
 // Output
-$output = new UnixPathData(array(), false);
+$output = new PosixPathData(array(), false);
 
 // Input
 $input = '/etc/fstab';
 
 // Output
-$output = new UnixPathData(array('etc', 'fstab'), true);
+$output = new PosixPathData(array('etc', 'fstab'), true);
 
 // Input
 $input = 'etc/fstab';
 
 // Output
-$output = new UnixPathData(array('etc', 'fstab'), false);
+$output = new PosixPathData(array('etc', 'fstab'), false);
 
 
 // Test
