@@ -2,10 +2,9 @@
 
 namespace SpencerMortensen\Paths;
 
-$paths = new PosixPaths();
-
 
 // Test
+$paths = new PosixPaths();
 $output= $paths->serialize($input);
 
 // Input
@@ -34,6 +33,7 @@ $output = 'etc/fstab';
 
 
 // Test
+$paths = new PosixPaths();
 $output = $paths->deserialize($input);
 
 // Input
@@ -62,6 +62,7 @@ $output = new PosixPathData(array('etc', 'fstab'), false);
 
 
 // Test
+$paths = new PosixPaths();
 $output = call_user_func_array(array($paths, 'join'), $input);
 
 // Input
@@ -96,6 +97,7 @@ $output = 'etc/fstab';
 
 
 // Test
+$paths = new PosixPaths();
 $c = $paths->isChildPath($a, $b);
 
 // Input
@@ -156,6 +158,7 @@ $c = true;
 
 
 // Test
+$paths = new PosixPaths();
 $c = $paths->getRelativePath($a, $b);
 
 // Input

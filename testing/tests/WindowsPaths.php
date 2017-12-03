@@ -2,10 +2,9 @@
 
 namespace SpencerMortensen\Paths;
 
-$paths = new WindowsPaths();
-
 
 // Test
+$paths = new WindowsPaths();
 $output= $paths->serialize($input);
 
 // Input
@@ -34,6 +33,7 @@ $output = 'C:Windows\\win.ini';
 
 
 // Test
+$paths = new WindowsPaths();
 $output = $paths->deserialize($input);
 
 // Input
@@ -62,6 +62,7 @@ $output = new WindowsPathData('C', array('Windows', 'win.ini'), false);
 
 
 // Test
+$paths = new WindowsPaths();
 $output = call_user_func_array(array($paths, 'join'), $input);
 
 // Input
@@ -96,6 +97,7 @@ $output = 'C:Windows';
 
 
 // Test
+$paths = new WindowsPaths();
 $c = $paths->isChildPath($a, $b);
 
 // Input
@@ -156,6 +158,7 @@ $c = true;
 
 
 // Test
+$paths = new WindowsPaths();
 $c = $paths->getRelativePath($a, $b);
 
 // Input
