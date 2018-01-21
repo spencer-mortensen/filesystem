@@ -1,0 +1,16 @@
+klanguage: php
+sudo: required
+dist: trusty
+php:
+ - '5.6'
+ - '7.1'
+install:
+ - php -r 'copy("http://lens.guide/lens.phar", "lens"); chmod("lens", 0755);'
+ - composer install
+script:
+ - ./lens
+notifications:
+   email:
+      on_start: never
+      on_success: change
+      on_failure: always
