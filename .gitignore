@@ -1,4 +1,4 @@
-/testing/coverage/
+/lens/coverage/
 /vendor/
 /composer.lock
 *.swp

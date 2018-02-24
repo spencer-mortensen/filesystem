@@ -5,28 +5,35 @@ namespace SpencerMortensen\Paths;
 
 // Test
 $paths = new PosixPaths();
-$output= $paths->serialize($input);
-
-// Input
 $input = new PosixPathData(array(), true);
+$output = $paths->serialize($input);
 
 // Output
 $output = '/';
 
-// Input
+
+// Test
+$paths = new PosixPaths();
 $input = new PosixPathData(array(), false);
+$output = $paths->serialize($input);
 
 // Output
 $output = '.';
 
-// Input
+
+// Test
+$paths = new PosixPaths();
 $input = new PosixPathData(array('etc', 'fstab'), true);
+$output = $paths->serialize($input);
 
 // Output
 $output = '/etc/fstab';
 
-// Input
+
+// Test
+$paths = new PosixPaths();
 $input = new PosixPathData(array('etc', 'fstab'), false);
+$output = $paths->serialize($input);
 
 // Output
 $output = 'etc/fstab';

@@ -5,28 +5,35 @@ namespace SpencerMortensen\Paths;
 
 // Test
 $paths = new WindowsPaths();
-$output= $paths->serialize($input);
-
-// Input
 $input = new WindowsPathData('C', array(), true);
+$output = $paths->serialize($input);
 
 // Output
 $output = 'C:\\';
 
-// Input
+
+// Test
+$paths = new WindowsPaths();
 $input = new WindowsPathData('C', array(), false);
+$output = $paths->serialize($input);
 
 // Output
 $output = 'C:.';
 
-// Input
+
+// Test
+$paths = new WindowsPaths();
 $input = new WindowsPathData('C', array('Windows', 'win.ini'), true);
+$output = $paths->serialize($input);
 
 // Output
 $output = 'C:\\Windows\\win.ini';
 
-// Input
+
+// Test
+$paths = new WindowsPaths();
 $input = new WindowsPathData('C', array('Windows', 'win.ini'), false);
+$output = $paths->serialize($input);
 
 // Output
 $output = 'C:Windows\\win.ini';
