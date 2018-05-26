@@ -9,6 +9,6 @@ $classes = array(
 	'SpencerMortensen\\RegularExpressions' => 'vendor/spencer-mortensen/regular-expressions/src'
 );
 
-require "{$project}/vendor/spencer-mortensen/autoloader/src/Autoloader.php";
+require_once "{$project}/vendor/spencer-mortensen/autoloader/src/Autoloader.php";
 
 new Autoloader($project, $classes);
