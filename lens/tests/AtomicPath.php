@@ -200,7 +200,7 @@ $output = '\\etc\\fstab';
 
 // Test
 $object = AtomicPath::fromString($path, $delimiter);
-$output = (string)$object->append($arguments);
+$output = (string)$object->add($arguments);
 
 /*
 // Input

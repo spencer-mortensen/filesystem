@@ -61,7 +61,7 @@ $output = $path;
 
 // Test
 $object = PosixPath::fromString($path);
-$output = (string)call_user_func_array(array($object, 'append'), $arguments);
+$output = (string)call_user_func_array(array($object, 'add'), $arguments);
 
 // Input
 $path = '/etc';

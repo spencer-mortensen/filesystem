@@ -164,7 +164,7 @@ $path = '\\Windows\\win.ini';
 
 // Test
 $object = WindowsPath::fromString($path);
-$output = call_user_func_array(array($object, 'append'), $arguments);
+$output = call_user_func_array(array($object, 'add'), $arguments);
 
 // Input
 $path = '\\Windows\\win.ini';
