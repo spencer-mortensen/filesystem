@@ -8,4 +8,4 @@ This project is available as a Composer package:
 
 This project uses the [Lens](http://lens.guide) unit-testing framework.
 
-[![Build Status](https://travis-ci.org/Spencer-Mortensen/filesystem.png?branch=master)](https://travis-ci.org/Spencer-Mortensen/filesystem)
+[![Build Status](https://travis-ci.org/spencer-mortensen/filesystem.png?branch=master)](https://travis-ci.org/spencer-mortensen/filesystem)
