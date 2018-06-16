@@ -6,7 +6,7 @@ use SpencerMortensen\Filesystem\AtomicPath;
 
 
 // Test
-$object = new PosixPath(new AtomicPath($isAbsolute, $atoms, $delimiter));
+$object = new PosixPath(null, new AtomicPath($isAbsolute, $atoms, $delimiter));
 $output = array($object->isAbsolute(), $object->getAtoms());
 
 // Input
