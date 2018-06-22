@@ -11,90 +11,90 @@ $drive = $object->getDrive();
 $isAbsolute = $object->isAbsolute();
 $atoms = $object->getAtoms();
 
-// Input
+// Cause
 $path = '';
 
-// Output
+// Effect
 $drive = null;
 $isAbsolute = false;
 $atoms = array();
 
-// Input
+// Cause
 $path = '.';
 
-// Output
+// Effect
 $drive = null;
 $isAbsolute = false;
 $atoms = array();
 
-// Input
+// Cause
 $path = '..';
 
-// Output
+// Effect
 $drive = null;
 $isAbsolute = false;
 $atoms = array('..');
 
-// Input
+// Cause
 $path = 'Windows';
 
-// Output
+// Effect
 $drive = null;
 $isAbsolute = false;
 $atoms = array('Windows');
 
-// Input
+// Cause
 $path = 'Windows\\win.ini';
 
-// Output
+// Effect
 $drive = null;
 $isAbsolute = false;
 $atoms = array('Windows', 'win.ini');
 
-// Input
+// Cause
 $path = 'Windows\\.\\win.ini\\..\\system.ini\\';
 
-// Output
+// Effect
 $drive = null;
 $isAbsolute = false;
 $atoms = array('Windows', 'system.ini');
 
-// Input
+// Cause
 $path = '\\';
 
-// Output
+// Effect
 $drive = null;
 $isAbsolute = true;
 $atoms = array();
 
-// Input
+// Cause
 $path = '\\..';
 
-// Output
+// Effect
 $drive = null;
 $isAbsolute = true;
 $atoms = array();
 
-// Input
+// Cause
 $path = '\\Windows';
 
-// Output
+// Effect
 $drive = null;
 $isAbsolute = true;
 $atoms = array('Windows');
 
-// Input
+// Cause
 $path = '\\Windows\\win.ini';
 
-// Output
+// Effect
 $drive = null;
 $isAbsolute = true;
 $atoms = array('Windows', 'win.ini');
 
-// Input
+// Cause
 $path = '\\Windows\\.\\win.ini\\..\\system.ini\\';
 
-// Output
+// Effect
 $drive = null;
 $isAbsolute = true;
 $atoms = array('Windows', 'system.ini');
@@ -105,60 +105,60 @@ $pathObject = new AtomicPath($isAbsolute, $atoms, '\\');
 $object = new WindowsPath($drive, $pathObject);
 $path = (string)$object;
 
-// Input
+// Cause
 $drive = null;
 $isAbsolute = false;
 $atoms = array();
 
-// Output
+// Effect
 $path = '.';
 
-// Input
+// Cause
 $drive = null;
 $isAbsolute = false;
 $atoms = array('..');
 
-// Output
+// Effect
 $path = '..';
 
-// Input
+// Cause
 $drive = null;
 $isAbsolute = false;
 $atoms = array('Windows');
 
-// Output
+// Effect
 $path = 'Windows';
 
-// Input
+// Cause
 $drive = null;
 $isAbsolute = false;
 $atoms = array('Windows', 'win.ini');
 
-// Output
+// Effect
 $path = 'Windows\\win.ini';
 
-// Input
+// Cause
 $drive = null;
 $isAbsolute = true;
 $atoms = array();
 
-// Output
+// Effect
 $path = '\\';
 
-// Input
+// Cause
 $drive = null;
 $isAbsolute = true;
 $atoms = array('Windows');
 
-// Output
+// Effect
 $path = '\\Windows';
 
-// Input
+// Cause
 $drive = null;
 $isAbsolute = true;
 $atoms = array('Windows', 'win.ini');
 
-// Output
+// Effect
 $path = '\\Windows\\win.ini';
 
 
@@ -166,39 +166,39 @@ $path = '\\Windows\\win.ini';
 $object = WindowsPath::fromString($path);
 $output = call_user_func_array(array($object, 'add'), $arguments);
 
-// Input
+// Cause
 $path = '\\Windows\\win.ini';
 $arguments = array();
 
-// Output
+// Effect
 $output = new WindowsPath(null, new AtomicPath(true, array('Windows', 'win.ini'), '\\'));
 
-// Input
+// Cause
 $path = '\\Windows\\win.ini';
 $arguments = array('..\\system.ini');
 
-// Output
+// Effect
 $output = new WindowsPath(null, new AtomicPath(true, array('Windows', 'system.ini'), '\\'));
 
-// Input
+// Cause
 $path = '\\Windows\\win.ini';
 $arguments = array('..', 'system.ini');
 
-// Output
+// Effect
 $output = new WindowsPath(null, new AtomicPath(true, array('Windows', 'system.ini'), '\\'));
 
-// Input
+// Cause
 $path = '\\Windows\\win.ini';
 $arguments = array(new WindowsPath(null, new AtomicPath(false, array('..', 'system.ini'), '\\')));
 
-// Output
+// Effect
 $output = new WindowsPath(null, new AtomicPath(true, array('Windows', 'system.ini'), '\\'));
 
-// Input
+// Cause
 $path = '..';
 $arguments = array('..', '.');
 
-// Output
+// Effect
 $output = new WindowsPath(null, new AtomicPath(false, array('..', '..'), '\\'));
 
 
@@ -206,32 +206,32 @@ $output = new WindowsPath(null, new AtomicPath(false, array('..', '..'), '\\'));
 $object = WindowsPath::fromString($path);
 $output = (string)$object->getRelativePath($input);
 
-// Input
+// Cause
 $path = '\\';
 $input = '\\';
 
-// Output
+// Effect
 $output = '.';
 
-// Input
+// Cause
 $path = '\\';
 $input = '\\Windows\\win.ini';
 
-// Output
+// Effect
 $output = 'Windows\\win.ini';
 
-// Input
+// Cause
 $path = '\\Windows';
 $input = '\\Windows\\win.ini';
 
-// Output
+// Effect
 $output = 'win.ini';
 
-// Input
+// Cause
 $path = '\\Windows';
 $input = '\\tmp\\file.txt';
 
-// Output
+// Effect
 $output = '..\\tmp\\file.txt';
 
 
@@ -239,23 +239,23 @@ $output = '..\\tmp\\file.txt';
 $object = WindowsPath::fromString($path);
 $output = $object->contains($input);
 
-// Input
+// Cause
 $path = '\\Windows';
 $input = '\\';
 
-// Output
+// Effect
 $output = false;
 
-// Input
+// Cause
 $path = '\\Windows';
 $input = '\\Windows';
 
-// Output
+// Effect
 $output = false;
 
-// Input
+// Cause
 $path = '\\Windows';
 $input = '\\Windows\\win.ini';
 
-// Output
+// Effect
 $output = true;

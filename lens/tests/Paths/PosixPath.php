@@ -9,20 +9,20 @@ use SpencerMortensen\Filesystem\AtomicPath;
 $object = new PosixPath(null, new AtomicPath($isAbsolute, $atoms, $delimiter));
 $output = array($object->isAbsolute(), $object->getAtoms());
 
-// Input
+// Cause
 $delimiter = '/';
 $isAbsolute = false;
 $atoms = array();
 
-// Output
+// Effect
 $output = array($isAbsolute, $atoms);
 
-// Input
+// Cause
 $delimiter = '/';
 $isAbsolute = true;
 $atoms = array('etc', 'fstab');
 
-// Output
+// Effect
 $output = array($isAbsolute, $atoms);
 
 
@@ -30,32 +30,32 @@ $output = array($isAbsolute, $atoms);
 $object = PosixPath::fromString($path);
 $output = array($object->isAbsolute(), $object->getAtoms());
 
-// Input
+// Cause
 $path = '.';
 
-// Output
+// Effect
 $output = array(false, array());
 
-// Input
+// Cause
 $path = '/etc/fstab';
 
-// Output
+// Effect
 $output = array(true, array('etc', 'fstab'));
 
 
 // Test
 $output = (string)PosixPath::fromString($path);
 
-// Input
+// Cause
 $path = '.';
 
-// Output
+// Effect
 $output = $path;
 
-// Input
+// Cause
 $path = '/etc/fstab';
 
-// Output
+// Effect
 $output = $path;
 
 
@@ -63,27 +63,27 @@ $output = $path;
 $object = PosixPath::fromString($path);
 $output = (string)call_user_func_array(array($object, 'add'), $arguments);
 
-// Input
+// Cause
 $path = '/etc';
 $arguments = array();
 
-// Output
+// Effect
 $output = '/etc';
 
-// Input
+// Cause
 $path = '/etc';
 $arguments = array('fstab');
 
-// Output
+// Effect
 $output = '/etc/fstab';
 
-// Input
+// Cause
 $path = '/etc';
 $arguments = array(
 	PosixPath::fromString('fstab')
 );
 
-// Output
+// Effect
 $output = '/etc/fstab';
 
 
@@ -91,46 +91,46 @@ $output = '/etc/fstab';
 $object = PosixPath::fromString($aPath);
 $output = $object->contains($bPath);
 
-// Input
+// Cause
 $aPath = '/etc';
 $bPath = '/';
 
-// Output
+// Effect
 $output = false;
 
-// Input
+// Cause
 $aPath = '/etc';
 $bPath = '/etc';
 
-// Output
+// Effect
 $output = false;
 
-// Input
+// Cause
 $aPath = '/etc';
 $bPath = '/etc/fstab';
 
-// Output
+// Effect
 $output = true;
 
-// Input
+// Cause
 $aPath = '/etc';
 $bPath = PosixPath::fromString('/');
 
-// Output
+// Effect
 $output = false;
 
-// Input
+// Cause
 $aPath = '/etc';
 $bPath = PosixPath::fromString('/etc');
 
-// Output
+// Effect
 $output = false;
 
-// Input
+// Cause
 $aPath = '/etc';
 $bPath = PosixPath::fromString('/etc/fstab');
 
-// Output
+// Effect
 $output = true;
 
 
@@ -138,17 +138,17 @@ $output = true;
 $object = PosixPath::fromString($aPath);
 $output = $object->getRelativePath($bPath);
 
-// Input
+// Cause
 $aPath = '/etc';
 $bPath = '/etc/fstab';
 
-// Output
+// Effect
 $output = PosixPath::fromString('fstab');
 
 
-// Input
+// Cause
 $aPath = '/etc';
 $bPath = PosixPath::fromString('/etc/fstab');
 
-// Output
+// Effect
 $output = PosixPath::fromString('fstab');
