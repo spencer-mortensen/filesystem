@@ -27,7 +27,7 @@ namespace SpencerMortensen\Filesystem;
 
 use ErrorException;
 use SpencerMortensen\Exceptions\Exceptions;
-use SpencerMortensen\Filesystem\Exceptions\ResultException;
+use SpencerMortensen\Exceptions\ResultException;
 use SpencerMortensen\Filesystem\Paths\Path;
 use SpencerMortensen\Filesystem\Paths\PosixPath;
 use SpencerMortensen\Filesystem\Paths\WindowsPath;

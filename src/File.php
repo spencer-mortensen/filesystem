@@ -28,7 +28,7 @@ namespace SpencerMortensen\Filesystem;
 use ErrorException;
 use InvalidArgumentException;
 use SpencerMortensen\Exceptions\Exceptions;
-use SpencerMortensen\Filesystem\Exceptions\ResultException;
+use SpencerMortensen\Exceptions\ResultException;
 use SpencerMortensen\Filesystem\Paths\Path;
 
 class File

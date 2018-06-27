@@ -22,7 +22,7 @@
     "require": {
         "php": ">=5.6.1",
         "spencer-mortensen/autoloader": "~1.0",
-        "spencer-mortensen/exceptions": "~3.0"
+        "spencer-mortensen/exceptions": "~3.1"
     },
     "autoload": {
         "psr-4": {
