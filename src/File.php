@@ -29,7 +29,6 @@ use ErrorException;
 use InvalidArgumentException;
 use SpencerMortensen\Exceptions\Exceptions;
 use SpencerMortensen\Exceptions\ResultException;
-use SpencerMortensen\Filesystem\Paths\Path;
 
 class File
 {

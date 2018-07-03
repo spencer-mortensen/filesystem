@@ -7,28 +7,28 @@ use InvalidArgumentException;
 
 
 // Test
-$path = new AtomicPath($isAbsolute, $atoms, $delimiter);
-$output = array($path->isAbsolute(), $path->getAtoms());
+$path = new CorePath($isAbsolute, $components, $delimiter);
+$output = [$path->isAbsolute(), $path->getComponents()];
 
 // Cause
 $delimiter = '/';
 $isAbsolute = false;
-$atoms = array('etc', 'fstab');
+$components = ['etc', 'fstab'];
 
 // Effect
-$output = array($isAbsolute, $atoms);
+$output = [$isAbsolute, $components];
 
 // Cause
 $delimiter = '\\';
 $isAbsolute = true;
-$atoms = array('Windows', 'win.ini');
+$components = ['Windows', 'win.ini'];
 
 // Effect
-$output = array($isAbsolute, $atoms);
+$output = [$isAbsolute, $components];
 
 
 // Test
-$output = AtomicPath::fromString($path, $delimiter);
+$output = CorePath::fromString($path, $delimiter);
 
 // Cause
 $delimiter = '/';
@@ -42,101 +42,101 @@ $delimiter = '/';
 $path = '';
 
 // Effect
-$output = new AtomicPath(false, array(), $delimiter);
+$output = new CorePath(false, [], $delimiter);
 
 // Cause
 $delimiter = '/';
 $path = '.';
 
 // Effect
-$output = new AtomicPath(false, array(), $delimiter);
+$output = new CorePath(false, [], $delimiter);
 
 // Cause
 $delimiter = '/';
 $path = '..';
 
 // Effect
-$output = new AtomicPath(false, array('..'), $delimiter);
+$output = new CorePath(false, ['..'], $delimiter);
 
 // Cause
 $delimiter = '/';
 $path = 'etc';
 
 // Effect
-$output = new AtomicPath(false, array('etc'), $delimiter);
+$output = new CorePath(false, ['etc'], $delimiter);
 
 // Cause
 $delimiter = '/';
 $path = 'etc/fstab';
 
 // Effect
-$output = new AtomicPath(false, array('etc', 'fstab'), $delimiter);
+$output = new CorePath(false, ['etc', 'fstab'], $delimiter);
 
 // Cause
 $delimiter = '/';
 $path = 'etc/./fstab/../crontab/';
 
 // Effect
-$output = new AtomicPath(false, array('etc', 'crontab'), $delimiter);
+$output = new CorePath(false, ['etc', 'crontab'], $delimiter);
 
 // Cause
 $delimiter = '/';
 $path = '/';
 
 // Effect
-$output = new AtomicPath(true, array(), $delimiter);
+$output = new CorePath(true, [], $delimiter);
 
 // Cause
 $delimiter = '/';
 $path = '/..';
 
 // Effect
-$output = new AtomicPath(true, array(), $delimiter);
+$output = new CorePath(true, [], $delimiter);
 
 // Cause
 $delimiter = '/';
 $path = '/etc';
 
 // Effect
-$output = new AtomicPath(true, array('etc'), $delimiter);
+$output = new CorePath(true, ['etc'], $delimiter);
 
 // Cause
 $delimiter = '/';
 $path = '/etc/fstab';
 
 // Effect
-$output = new AtomicPath(true, array('etc', 'fstab'), $delimiter);
+$output = new CorePath(true, ['etc', 'fstab'], $delimiter);
 
 // Cause
 $delimiter = '/';
 $path = '/etc/./fstab/../crontab/';
 
 // Effect
-$output = new AtomicPath(true, array('etc', 'crontab'), $delimiter);
+$output = new CorePath(true, ['etc', 'crontab'], $delimiter);
 
 // Cause
 $delimiter = '~';
 $path = '/etc/fstab';
 
 // Effect
-$output = new AtomicPath(false, array('/etc/fstab'), $delimiter);
+$output = new CorePath(false, ['/etc/fstab'], $delimiter);
 
 // Cause
 $delimiter = '~';
 $path = '~etc~fstab';
 
 // Effect
-$output = new AtomicPath(true, array('etc', 'fstab'), $delimiter);
+$output = new CorePath(true, ['etc', 'fstab'], $delimiter);
 
 
 // Test
-$path = new AtomicPath($isAbsolute, $atoms, $delimiter);
+$path = new CorePath($isAbsolute, $components, $delimiter);
 $output = (string)$path;
 
 // Cause
 $delimiter = '/';
 $isAbsolute = false;
-$atoms = array();
+$components = [];
 
 // Effect
 $output = '.';
@@ -144,7 +144,7 @@ $output = '.';
 // Cause
 $delimiter = '/';
 $isAbsolute = false;
-$atoms = array('etc');
+$components = ['etc'];
 
 // Effect
 $output = 'etc';
@@ -152,7 +152,7 @@ $output = 'etc';
 // Cause
 $delimiter = '/';
 $isAbsolute = false;
-$atoms = array('etc', 'fstab');
+$components = ['etc', 'fstab'];
 
 // Effect
 $output = 'etc/fstab';
@@ -160,7 +160,7 @@ $output = 'etc/fstab';
 // Cause
 $delimiter = '\\';
 $isAbsolute = false;
-$atoms = array('etc', 'fstab');
+$components = ['etc', 'fstab'];
 
 // Effect
 $output = 'etc\\fstab';
@@ -168,7 +168,7 @@ $output = 'etc\\fstab';
 // Cause
 $delimiter = '/';
 $isAbsolute = true;
-$atoms = array();
+$components = [];
 
 // Effect
 $output = '/';
@@ -176,7 +176,7 @@ $output = '/';
 // Cause
 $delimiter = '/';
 $isAbsolute = true;
-$atoms = array('etc');
+$components = ['etc'];
 
 // Effect
 $output = '/etc';
@@ -184,7 +184,7 @@ $output = '/etc';
 // Cause
 $delimiter = '/';
 $isAbsolute = true;
-$atoms = array('etc', 'fstab');
+$components = ['etc', 'fstab'];
 
 // Effect
 $output = '/etc/fstab';
@@ -192,32 +192,20 @@ $output = '/etc/fstab';
 // Cause
 $delimiter = '\\';
 $isAbsolute = true;
-$atoms = array('etc', 'fstab');
+$components = ['etc', 'fstab'];
 
 // Effect
 $output = '\\etc\\fstab';
 
 
 // Test
-$object = AtomicPath::fromString($path, $delimiter);
+$object = CorePath::fromString($path, $delimiter);
 $output = (string)$object->add($arguments);
 
-/*
 // Cause
 $path = '/';
 $delimiter = '/';
-$arguments = array(
-	AtomicPath::fromString('.', $delimiter)
-);
-
-// Effect
-throw new InvalidArgumentException();
-*/
-
-// Cause
-$path = '/';
-$delimiter = '/';
-$arguments = array();
+$arguments = [];
 
 // Effect
 $output = '/';
@@ -225,9 +213,9 @@ $output = '/';
 // Cause
 $path = '/';
 $delimiter = '/';
-$arguments = array(
-	AtomicPath::fromString('etc', $delimiter)
-);
+$arguments = [
+	CorePath::fromString('etc', $delimiter)
+];
 
 // Effect
 $output = '/etc';
@@ -235,10 +223,10 @@ $output = '/etc';
 // Cause
 $path = '/';
 $delimiter = '/';
-$arguments = array(
-	AtomicPath::fromString('etc', $delimiter),
-	AtomicPath::fromString('fstab', $delimiter)
-);
+$arguments = [
+	CorePath::fromString('etc', $delimiter),
+	CorePath::fromString('fstab', $delimiter)
+];
 
 // Effect
 $output = '/etc/fstab';
@@ -246,7 +234,7 @@ $output = '/etc/fstab';
 // Cause
 $path = '/etc';
 $delimiter = '/';
-$arguments = array();
+$arguments = [];
 
 // Effect
 $output = '/etc';
@@ -254,9 +242,9 @@ $output = '/etc';
 // Cause
 $path = '/etc';
 $delimiter = '/';
-$arguments = array(
-	AtomicPath::fromString('fstab', $delimiter)
-);
+$arguments = [
+	CorePath::fromString('fstab', $delimiter)
+];
 
 // Effect
 $output = '/etc/fstab';
@@ -264,7 +252,7 @@ $output = '/etc/fstab';
 // Cause
 $path = '/etc/fstab';
 $delimiter = '/';
-$arguments = array();
+$arguments = [];
 
 // Effect
 $output = '/etc/fstab';
@@ -272,9 +260,9 @@ $output = '/etc/fstab';
 // Cause
 $path = '/etc/fstab';
 $delimiter = '/';
-$arguments = array(
-	AtomicPath::fromString('../crontab', $delimiter)
-);
+$arguments = [
+	CorePath::fromString('../crontab', $delimiter)
+];
 
 // Effect
 $output = '/etc/crontab';
@@ -282,10 +270,10 @@ $output = '/etc/crontab';
 // Cause
 $path = '/etc/fstab';
 $delimiter = '/';
-$arguments = array(
-	AtomicPath::fromString('..', $delimiter),
-	AtomicPath::fromString('crontab', $delimiter)
-);
+$arguments = [
+	CorePath::fromString('..', $delimiter),
+	CorePath::fromString('crontab', $delimiter)
+];
 
 // Effect
 $output = '/etc/crontab';
@@ -293,23 +281,33 @@ $output = '/etc/crontab';
 // Cause
 $path = '..';
 $delimiter = '/';
-$arguments = array(
-	AtomicPath::fromString('..', $delimiter),
-	AtomicPath::fromString('.', $delimiter)
-);
+$arguments = [
+	CorePath::fromString('..', $delimiter),
+	CorePath::fromString('.', $delimiter)
+];
 
 // Effect
 $output = '../..';
 
+// Cause
+$path = '../crontab';
+$delimiter = '/';
+$arguments = [
+	CorePath::fromString('/etc/crontab', $delimiter)
+];
+
+// Effect
+$ouput = '/etc/crontab';
+
 
 // Test
-$object = AtomicPath::fromString($path, $delimiter);
+$object = CorePath::fromString($path, $delimiter);
 $output = $object->contains($input);
 
 // Cause
 $path = '.';
 $delimiter = '/';
-$input = AtomicPath::fromString('/', $delimiter);
+$input = CorePath::fromString('/', $delimiter);
 
 // Effect
 throw new Exception();
@@ -317,7 +315,7 @@ throw new Exception();
 // Cause
 $path = '/etc';
 $delimiter = '/';
-$input = AtomicPath::fromString('/', $delimiter);
+$input = CorePath::fromString('/', $delimiter);
 
 // Effect
 $output = false;
@@ -325,7 +323,7 @@ $output = false;
 // Cause
 $path = '/etc';
 $delimiter = '/';
-$input = AtomicPath::fromString('/etc', $delimiter);
+$input = CorePath::fromString('/etc', $delimiter);
 
 // Effect
 $output = false;
@@ -333,20 +331,20 @@ $output = false;
 // Cause
 $path = '/etc';
 $delimiter = '/';
-$input = AtomicPath::fromString('/etc/fstab', $delimiter);
+$input = CorePath::fromString('/etc/fstab', $delimiter);
 
 // Effect
 $output = true;
 
 
 // Test
-$object = AtomicPath::fromString($path, $delimiter);
+$object = CorePath::fromString($path, $delimiter);
 $output = (string)$object->getRelativePath($input);
 
 // Cause
 $path = '.';
 $delimiter = '/';
-$input = AtomicPath::fromString('/', $delimiter);
+$input = CorePath::fromString('/', $delimiter);
 
 // Effect
 throw new Exception();
@@ -354,7 +352,7 @@ throw new Exception();
 // Cause
 $path = '/';
 $delimiter = '/';
-$input = AtomicPath::fromString('.', $delimiter);
+$input = CorePath::fromString('.', $delimiter);
 
 // Effect
 throw new InvalidArgumentException();
@@ -362,7 +360,7 @@ throw new InvalidArgumentException();
 // Cause
 $path = '/';
 $delimiter = '/';
-$input = AtomicPath::fromString('/', $delimiter);
+$input = CorePath::fromString('/', $delimiter);
 
 // Effect
 $output = '.';
@@ -370,7 +368,7 @@ $output = '.';
 // Cause
 $path = '/';
 $delimiter = '/';
-$input = AtomicPath::fromString('/etc/fstab', $delimiter);
+$input = CorePath::fromString('/etc/fstab', $delimiter);
 
 // Effect
 $output = 'etc/fstab';
@@ -378,7 +376,7 @@ $output = 'etc/fstab';
 // Cause
 $path = '/etc';
 $delimiter = '/';
-$input = AtomicPath::fromString('/etc/fstab', $delimiter);
+$input = CorePath::fromString('/etc/fstab', $delimiter);
 
 // Effect
 $output = 'fstab';
@@ -386,7 +384,7 @@ $output = 'fstab';
 // Cause
 $path = '/etc';
 $delimiter = '/';
-$input = AtomicPath::fromString('/tmp/file.txt', $delimiter);
+$input = CorePath::fromString('/tmp/file.txt', $delimiter);
 
 // Effect
 $output = '../tmp/file.txt';

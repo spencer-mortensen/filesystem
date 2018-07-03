@@ -1,0 +1,23 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [0.0.16] - 2018-07-03
+
+### Added
+- You can now write the entire contents of a directory using the "Directory::write" method
+  by passing in an associative array that maps a file or directory name to its contents.
+
+### Changed
+- Renamed: "SpencerMortensen\Filesystem\Paths\Path" => "SpencerMortensen\Filesystem\Path"
+- Renamed: "WindowsPath::getDrive()" => "WindowsPath::getPrefix()"
+
+### Removed
+- Removed "Filesystem::getPath()"
+- Removed "Filesystem::getDirectory($string)"
+- Removed "Filesystem::getFile($string)"
+- Removed "Filesystem::getCurrentDirectory()"
