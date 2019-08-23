@@ -25,7 +25,7 @@
 
 namespace SpencerMortensen\Filesystem;
 
-use SpencerMortensen\Exceptions\Exceptions;
+use SpencerMortensen\Exceptions\ErrorHandling;
 use SpencerMortensen\Exceptions\ResultException;
 
 class Filesystem
@@ -37,10 +37,10 @@ class Filesystem
 	public function getCurrentDirectoryPath()
 	{
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			$cwd = getcwd();
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 
 		if (!is_string($cwd)) {
@@ -55,10 +55,10 @@ class Filesystem
 		$pathString = (string)$path;
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			return file_exists($pathString);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 	}
 
@@ -67,10 +67,10 @@ class Filesystem
 		$pathString = (string)$path;
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			return is_dir($pathString);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 	}
 
@@ -79,10 +79,10 @@ class Filesystem
 		$pathString = (string)$path;
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			return is_file($pathString);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 	}
 }

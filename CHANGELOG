@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.0.18] - 2019-08-23
+
+### Changed
+- Upgraded the "spencer-mortensen/exceptions" dependency
+
+
+## [0.0.17] - 2019-07-07
+
+### Changed
+- The "Path::fromString($input)" methods now accept integer input.
+
+
 ## [0.0.16] - 2018-07-03
 
 ### Added
@@ -17,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed: "WindowsPath::getDrive()" => "WindowsPath::getPrefix()"
 
 ### Removed
-- Removed "Filesystem::getPath()"
-- Removed "Filesystem::getDirectory($string)"
-- Removed "Filesystem::getFile($string)"
-- Removed "Filesystem::getCurrentDirectory()"
+- Removed: "Filesystem::getPath()"
+- Removed: "Filesystem::getDirectory($string)"
+- Removed: "Filesystem::getFile($string)"
+- Removed: "Filesystem::getCurrentDirectory()"

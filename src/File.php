@@ -27,7 +27,7 @@ namespace SpencerMortensen\Filesystem;
 
 use ErrorException;
 use InvalidArgumentException;
-use SpencerMortensen\Exceptions\Exceptions;
+use SpencerMortensen\Exceptions\ErrorHandling;
 use SpencerMortensen\Exceptions\ResultException;
 
 class File
@@ -54,10 +54,10 @@ class File
 		}
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			$contents = file_get_contents($path);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 
 		if (!is_string($contents)) {
@@ -81,10 +81,10 @@ class File
 		}
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			$writtenBytes = file_put_contents($path, $value);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 
 		$totalBytes = strlen($value);
@@ -111,10 +111,10 @@ class File
 		}
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			$isMoved = rename($oldPathString, $newPathString);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 
 		if ($isMoved !== true) {
@@ -133,10 +133,10 @@ class File
 		}
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			$isDeleted = unlink($path);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 
 		if ($isDeleted !== true) {
@@ -149,10 +149,10 @@ class File
 		$path = (string)$this->path;
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			$time = filemtime($path);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 
 		if (!is_int($time)) {

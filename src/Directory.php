@@ -26,7 +26,7 @@
 namespace SpencerMortensen\Filesystem;
 
 use ErrorException;
-use SpencerMortensen\Exceptions\Exceptions;
+use SpencerMortensen\Exceptions\ErrorHandling;
 use SpencerMortensen\Exceptions\ResultException;
 
 class Directory
@@ -71,7 +71,7 @@ class Directory
 		$contents = [];
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 
 			$directory = opendir($directoryPath);
 
@@ -85,7 +85,7 @@ class Directory
 
 			closedir($directory);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 
 		return $contents;
@@ -141,10 +141,10 @@ class Directory
 		}
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			$isCreated = mkdir($pathString, self::$mode, true);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 
 		if ($isCreated !== true) {
@@ -168,10 +168,10 @@ class Directory
 		}
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			$isMoved = rename($oldPathString, $newPathString);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 
 		if ($isMoved !== true) {
@@ -196,10 +196,10 @@ class Directory
 		}
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			$isDeleted = rmdir($path);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 
 		if ($isDeleted !== true) {
@@ -212,10 +212,10 @@ class Directory
 		$path = (string)$this->path;
 
 		try {
-			Exceptions::on();
+			ErrorHandling::on();
 			$time = filemtime($path);
 		} finally {
-			Exceptions::off();
+			ErrorHandling::off();
 		}
 
 		if (!is_int($time)) {
