@@ -27,7 +27,6 @@ namespace SpencerMortensen\Filesystem;
 
 use ErrorException;
 use SpencerMortensen\Exceptions\ErrorHandling;
-use SpencerMortensen\Exceptions\ResultException;
 
 class Directory
 {

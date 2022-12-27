@@ -26,7 +26,6 @@
 namespace SpencerMortensen\Filesystem;
 
 use SpencerMortensen\Exceptions\ErrorHandling;
-use SpencerMortensen\Exceptions\ResultException;
 
 class Filesystem
 {

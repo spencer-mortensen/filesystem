@@ -28,7 +28,6 @@ namespace SpencerMortensen\Filesystem;
 use ErrorException;
 use InvalidArgumentException;
 use SpencerMortensen\Exceptions\ErrorHandling;
-use SpencerMortensen\Exceptions\ResultException;
 
 class File
 {
